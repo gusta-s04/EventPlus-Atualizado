@@ -2,7 +2,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 
 import Home from "../pages/Home/Home";
 import Eventos from "../pages/Eventos/Eventos";
-import DetalhesEvento from "../pages/DetalhesEvento/DetalhesEvento";
+import DetalhesEvento from "../pages/DetalhesEvento/detalhesEvento";
 
 function AppRoutes() {
     return (

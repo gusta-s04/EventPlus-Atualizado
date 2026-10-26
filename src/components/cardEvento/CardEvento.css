@@ -3,7 +3,7 @@
     --branco: #ffffff;
     --cor-texto: #17143f;
     --vermelho: #b51d44;
-    --vermelho-escuro: #821b47;
+    --vermelho-escuro: #821B47;
     --azul-claro: rgba(0, 80, 251, 0.21);
 }
 
@@ -17,22 +17,22 @@
     justify-content: space-between;
 }
 
-.home-evento-card img {
+.home-evento-card img{
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 
-.home-evento-card span {
+.home-evento-card span{
     background-color: var(--azul-claro);
     border-radius: 12px;
     padding: 0 10px;
-    display: inline-block;
+    display:inline-block;
     width: 50%;
     text-align: center;
 }
 
-.home-evento-card-info {
+.home-evento-card-info{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,6 +52,6 @@
 .home-evento-card h3,
 .home-evento-card p,
 .home-evento-card span,
-.home-evento-card button {
+.home-evento-card button{
     margin: 12px 16px;
 }

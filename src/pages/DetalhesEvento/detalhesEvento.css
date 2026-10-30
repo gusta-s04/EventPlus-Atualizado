@@ -1,0 +1,178 @@
+
+.detalhe-evento-page {
+    min-height: 70vh;
+    color: #17143f;
+    font-family: 'Poppins', sans-serif;
+}
+
+.detalhe-evento-status {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.detalhe-evento-banner {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+.detalhe-evento-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalhe-evento-container {
+    width: min(1100px, calc(100% - 48px));
+    margin: 35px auto 60px;
+}
+
+.detalhe-evento-container h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.detalhe-evento-abas {
+    display: flex;
+    gap: 35px;
+    border-bottom: 1px solid #ded9da;
+    margin-bottom: 25px;
+}
+
+.detalhe-evento-abas button {
+    padding: 12px 4px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: #17143f;
+    font: inherit;
+    cursor: pointer;
+}
+
+.detalhe-evento-abas button.ativa {
+    color: #b51d44;
+    border-bottom-color: #b51d44;
+    font-weight: 600;
+}
+
+.detalhe-evento-sobre {
+    min-height: 100px;
+    line-height: 1.7;
+}
+
+.detalhe-evento-comentarios {
+    min-height: 130px;
+}
+
+.detalhe-evento-comentarios form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.detalhe-evento-comentarios form > div {
+    flex: 1;
+}
+
+.detalhe-evento-comentarios input,
+.detalhe-evento-comentarios textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.detalhe-evento-comentarios form button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.detalhe-evento-comentarios form button img {
+    width: 25px;
+    height: 25px;
+}
+
+.detalhe-evento-comentario {
+    padding: 16px 0;
+    border-bottom: 1px solid #ded9da;
+}
+
+.detalhe-evento-comentario strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detalhe-evento-comentario time {
+    color: #888;
+    font-size: 12px;
+}
+
+.detalhe-evento-comentario p {
+    margin-bottom: 0;
+}
+
+.detalhe-evento-informacoes {
+    margin-top: 40px;
+    padding: 25px;
+    border: 1px solid #ded9da;
+    border-radius: 10px;
+}
+
+.detalhe-evento-informacoes h2 {
+    font-size: 19px;
+}
+
+.detalhe-evento-informacoes hr {
+    border: none;
+    border-top: 1px solid #ded9da;
+    margin-bottom: 20px;
+}
+
+.detalhe-evento-informacoes > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.detalhe-evento-informacoes > div img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.detalhe-evento-informacoes button {
+    margin-top: 15px;
+}
+
+.detalhe-evento-cancelar {
+    background: #6f6a75;
+}
+
+.detalhe-evento-mensagem {
+    color: #b51d44;
+    font-size: 13px;
+}
+
+@media (max-width: 650px) {
+    .detalhe-evento-banner {
+        height: 200px;
+    }
+
+    .detalhe-evento-container {
+        width: calc(100% - 32px);
+        margin-top: 25px;
+    }
+
+    .detalhe-evento-container h1 {
+        font-size: 22px;
+    }
+
+    .detalhe-evento-abas {
+        gap: 15px;
+    }
+
+    .detalhe-evento-informacoes {
+        padding: 18px;
+    }
+}

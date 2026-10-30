@@ -1,0 +1,84 @@
+
+.lista-tipos.lista-usuarios {
+    width: 100%;
+    margin: 40px auto 0;
+}
+
+.lista-usuarios .lista-tipos-conteudo {
+    width: 100%;
+}
+
+.lista-usuarios h2 {
+    color: var(--cor-texto);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.lista-tipos-tabela-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--cinza-claro);
+    border-radius: 10px;
+    background: var(--branco);
+}
+
+.lista-usuarios-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--cor-texto);
+    text-align: left;
+}
+
+.lista-usuarios-tabela th {
+    background: #f5f2f3;
+    color: var(--cor-texto);
+    font-weight: 700;
+    padding: 16px;
+}
+
+.lista-usuarios-tabela td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--cinza-claro);
+}
+
+.lista-usuarios-tabela th:nth-child(n + 4),
+.lista-usuarios-tabela td:nth-child(n + 4) {
+    text-align: center;
+    width: 75px;
+}
+
+.lista-tipos-acao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.lista-tipos-acao img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.lista-tipos-acao:hover {
+    opacity: 0.7;
+}
+
+.lista-tipos-linha-ativa {
+    background: rgba(181, 29, 68, 0.08);
+}
+
+.lista-tipos-tabela-vazia {
+    text-align: center !important;
+    padding: 25px !important;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+    .lista-usuarios-tabela {
+        min-width: 650px;
+    }
+}

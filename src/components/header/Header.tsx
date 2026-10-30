@@ -1,20 +1,24 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom"
 
-import logoEvent from "../../assets/logo-event.svg";
-import imagemUsuario from "../../assets/tela_tipoUsuario.svg";
+import logoEvent from "../../assets/logo-event.svg"
+import "./Header.css"
+import { perfilEhAdministrador, perfilEhOrganizador, useAuth } from "../../context/auth"
 
-import "./Header.css";
-import { useAuth } from "../../context/auth";
 
 function Header() {
-    const { autenticado, logout } = useAuth();
+    const { autenticado, perfil, logout } = useAuth();
+
 
     const navigate = useNavigate();
+    const administrador = perfilEhAdministrador(perfil);
+    const organizador = perfilEhOrganizador(perfil);
+
 
     function sair() {
         logout();
-        navigate("/login");
+        navigate("/Login");
     }
+
 
     return (
         <header className="header">
@@ -23,40 +27,33 @@ function Header() {
                     <img src={logoEvent} alt="Logo Event+" />
                 </Link>
 
+
                 <nav>
                     <NavLink to="/home">Home</NavLink>
                     <NavLink to="/eventos">Eventos</NavLink>
-                    <NavLink to="/usuarios">Usuários</NavLink>
-                    <Link to="/home#contato">Contatos</Link>
+                    {administrador ?
+                     <NavLink to="/usuarios">Usuarios</NavLink>
+                     : null
+                }{organizador ?
+                    <NavLink to="/CadastroEvento">Cadastro Evento</NavLink>
+                    :null
+                }
+                     <Link to="/home#contato">Contatos</Link>
                 </nav>
 
-                {autenticado ? (
-                    <div className="header-usuario">
-                        <Link to="/conta" className="header-conta">
-                            <img
-                                src={imagemUsuario}
-                                alt="Foto do usuário"
-                                className="header-foto-usuario"
-                            />
-                            <span>Minha Conta</span>
-                        </Link>
 
-                        <Link
-                            to="/login"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                sair();
-                            }}
-                        >
-                            Sair
-                        </Link>
-                    </div>
-                ) : (
+                {autenticado ?
+                    <>
+                        <Link to="/conta">Minha Conta</Link>
+                        <Link onClick={sair} to="/login">Sair</Link>
+                    </>
+                    :
                     <Link to="/login">Entrar</Link>
-                )}
+                }
             </div>
         </header>
-    );
+    )
 }
+
 
 export default Header;

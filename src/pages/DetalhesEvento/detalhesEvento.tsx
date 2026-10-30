@@ -1,3 +1,4 @@
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import type {
@@ -231,179 +232,196 @@ function DetalhesEvento() {
         <>
             <Header />
 
-            <main>
+            <main className="detalhe-evento-page">
                 {carregando ? (
-                    <p>Carregando evento...</p>
+                    <p className="detalhe-evento-status">
+                        Carregando evento...
+                    </p>
                 ) : erro ? (
-                    <p role="alert">{erro}</p>
+                    <p className="detalhe-evento-status" role="alert">
+                        {erro}
+                    </p>
                 ) : evento ? (
                     <>
                         <img
+                            className="detalhe-evento-banner"
                             src={evento.imagemUrl || imagemPadrao}
                             alt="Banner do evento"
                         />
 
-                        <h1>{evento.nome}</h1>
+                        <div className="detalhe-evento-container">
+                            <h1>{evento.nome}</h1>
 
-                        <div>
-                            <button
-                                type="button"
-                                onClick={() => setSecaoComentarios(false)}
-                            >
-                                Sobre o Evento
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={() => setSecaoComentarios(true)}
-                            >
-                                Comentários
-                            </button>
-
-                            {secaoComentarios ? (
-                                <div
-                                    className="detalhe-evento-comentarios"
-                                    role="tabpanel"
+                            <div className="detalhe-evento-abas" role="tablist">
+                                <button
+                                    type="button"
+                                    className={!secaoComentarios ? "ativa" : ""}
+                                    onClick={() => setSecaoComentarios(false)}
                                 >
-                                    <form onSubmit={comentar}>
-                                        <label
-                                            className="visually-hidden"
-                                            htmlFor="novo-comentario"
+                                    Sobre o Evento
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className={secaoComentarios ? "ativa" : ""}
+                                    onClick={() => setSecaoComentarios(true)}
+                                >
+                                    Comentários
+                                </button>
+                            </div>
+
+                            <div className="detalhe-evento-conteudo">
+                                <section className="detalhe-evento-sobre">
+                                    {secaoComentarios ? (
+                                        <div
+                                            className="detalhe-evento-comentarios"
+                                            role="tabpanel"
                                         >
-                                            Comentar
-                                        </label>
+                                            <form onSubmit={comentar}>
+                                                <label
+                                                    className="visually-hidden"
+                                                    htmlFor="novo-comentario"
+                                                >
+                                                    Comentar
+                                                </label>
 
-                                        <Campo
-                                            id="novo-comentario"
-                                            value={novoComentario}
-                                            maxLength={200}
-                                            onChange={(event) =>
-                                                setNovoComentario(
-                                                    event.target.value
-                                                )
-                                            }
-                                        />
+                                                <Campo
+                                                    id="novo-comentario"
+                                                    value={novoComentario}
+                                                    maxLength={200}
+                                                    onChange={(event) =>
+                                                        setNovoComentario(
+                                                            event.target.value
+                                                        )
+                                                    }
+                                                />
 
-                                        <button
-                                            type="submit"
-                                            aria-label="Enviar comentário"
-                                            disabled={enviandoComentario}
-                                        >
-                                            <img
-                                                src={enviar}
-                                                alt="Ícone de enviar"
-                                            />
-                                        </button>
-                                    </form>
+                                                <button
+                                                    type="submit"
+                                                    aria-label="Enviar comentário"
+                                                    disabled={enviandoComentario}
+                                                >
+                                                    <img
+                                                        src={enviar}
+                                                        alt="Ícone de enviar"
+                                                    />
+                                                </button>
+                                            </form>
 
-                                    {mensagemComentario && (
+                                            {mensagemComentario && (
+                                                <p
+                                                    className="detalhe-evento-mensagem"
+                                                    role="status"
+                                                >
+                                                    {mensagemComentario}
+                                                </p>
+                                            )}
+
+                                            {comentarios.length === 0 ? (
+                                                <p>
+                                                    Nenhum comentário publicado.
+                                                </p>
+                                            ) : (
+                                                comentarios.map((comentario) => (
+                                                    <article
+                                                        key={comentario.idComentario}
+                                                        className="detalhe-evento-comentario"
+                                                    >
+                                                        <div>
+                                                            <strong>
+                                                                {comentario.idUsuarioNavigation?.nome ||
+                                                                    "Usuário"}
+                                                            </strong>
+
+                                                            <time>
+                                                                {new Date(
+                                                                    comentario.dataComentario
+                                                                ).toLocaleString(
+                                                                    "pt-BR",
+                                                                    {
+                                                                        day: "2-digit",
+                                                                        month: "2-digit",
+                                                                        hour: "2-digit",
+                                                                        minute: "2-digit"
+                                                                    }
+                                                                )}
+                                                            </time>
+
+                                                            <p>
+                                                                {comentario.descricao}
+                                                            </p>
+                                                        </div>
+                                                    </article>
+                                                ))
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <p>{evento.descricao}</p>
+                                    )}
+                                </section>
+
+                                <section className="detalhe-evento-informacoes">
+                                    <h2>Informações principais</h2>
+                                    <hr />
+
+                                    <div>
+                                        <img src={relogio} alt="" />
+                                        <span>
+                                            {formatarData(evento.dataEvento)} às{" "}
+                                            {formatarHora(evento.dataEvento)}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <img src={predio} alt="" />
+                                        <span>
+                                            {evento.idInstituicaoNavigation?.nomeFantasia}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <img src={filtro} alt="" />
+                                        <span>
+                                            {evento.idTipoEventoNavigation?.titulo}
+                                        </span>
+                                    </div>
+
+                                    <Botao
+                                        className={
+                                            presenca
+                                                ? "detalhe-evento-cancelar"
+                                                : ""
+                                        }
+                                        texto={
+                                            checandoPresenca
+                                                ? "Verificando inscrição..."
+                                                : presenca
+                                                    ? "Cancelar Inscrição"
+                                                    : enviandoInscricao
+                                                        ? "Inscrevendo..."
+                                                        : "Se inscrever"
+                                        }
+                                        type="button"
+                                        disabled={
+                                            checandoPresenca || enviandoInscricao
+                                        }
+                                        onClick={() =>
+                                            presenca
+                                                ? setConfirmandoCancelamento(true)
+                                                : void inscrever()
+                                        }
+                                    />
+
+                                    {mensagemInscricao && (
                                         <p
                                             className="detalhe-evento-mensagem"
                                             role="status"
                                         >
-                                            {mensagemComentario}
+                                            {mensagemInscricao}
                                         </p>
                                     )}
-
-                                    {comentarios.length === 0 ? (
-                                        <p>Nenhum comentário publicado.</p>
-                                    ) : (
-                                        comentarios.map((comentario) => (
-                                            <article
-                                                key={comentario.idComentario}
-                                                className="detalhe-evento-comentario"
-                                            >
-                                                <div>
-                                                    <strong>
-                                                        {comentario.idUsuarioNavigation?.nome ||
-                                                            "Usuário"}
-                                                    </strong>
-
-                                                    <time>
-                                                        {new Date(
-                                                            comentario.dataComentario
-                                                        ).toLocaleString(
-                                                            "pt-BR",
-                                                            {
-                                                                day: "2-digit",
-                                                                month: "2-digit",
-                                                                hour: "2-digit",
-                                                                minute: "2-digit"
-                                                            }
-                                                        )}
-                                                    </time>
-
-                                                    <p>
-                                                        {comentario.descricao}
-                                                    </p>
-                                                </div>
-                                            </article>
-                                        ))
-                                    )}
-                                </div>
-                            ) : (
-                                <p>{evento.descricao}</p>
-                            )}
-                        </div>
-
-                        <div>
-                            <h2>Informações principais</h2>
-                            <hr />
-
-                            <div>
-                                <img src={relogio} alt="" />
-                                <span>
-                                    {formatarData(evento.dataEvento)} às{" "}
-                                    {formatarHora(evento.dataEvento)}
-                                </span>
+                                </section>
                             </div>
-
-                            <div>
-                                <img src={predio} alt="" />
-                                <span>
-                                    {evento.idInstituicaoNavigation?.nomeFantasia}
-                                </span>
-                            </div>
-
-                            <div>
-                                <img src={filtro} alt="" />
-                                <span>
-                                    {evento.idTipoEventoNavigation?.titulo}
-                                </span>
-                            </div>
-
-                            <Botao
-                                className={
-                                    presenca ? "detalhe-evento-cancelar" : ""
-                                }
-                                texto={
-                                    checandoPresenca
-                                        ? "Verificando inscrição..."
-                                        : presenca
-                                            ? "Cancelar Inscrição"
-                                            : enviandoInscricao
-                                                ? "Inscrevendo..."
-                                                : "Se inscrever"
-                                }
-                                type="button"
-                                disabled={
-                                    checandoPresenca || enviandoInscricao
-                                }
-                                onClick={() =>
-                                    presenca
-                                        ? setConfirmandoCancelamento(true)
-                                        : void inscrever()
-                                }
-                            />
-
-                            {mensagemInscricao && (
-                                <p
-                                    className="detalhe-evento-mensagem"
-                                    role="status"
-                                >
-                                    {mensagemInscricao}
-                                </p>
-                            )}
                         </div>
 
                         <ModalConfirmacao
@@ -425,7 +443,9 @@ function DetalhesEvento() {
                         />
                     </>
                 ) : (
-                    <p>Evento não encontrado.</p>
+                    <p className="detalhe-evento-status">
+                        Evento não encontrado.
+                    </p>
                 )}
             </main>
 

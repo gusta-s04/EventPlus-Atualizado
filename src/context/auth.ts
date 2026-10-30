@@ -21,10 +21,15 @@ export function useAuth(){
     return context;
 }
 
-export function perfilEhAdministrador(perfil: string){
-    return perfil === "administrador" || perfil === "admin";
+
+
+export function perfilEhAdministrador(perfil: string) {
+    return perfil?.trim().toLowerCase() === "administrador" ||
+           perfil?.trim().toLowerCase() === "admin";
 }
 
-export function perfilEhOrganizador(perfil: string){
-    return perfilEhAdministrador(perfil) || perfil === "organizador";
+export function perfilEhOrganizador(perfil: string) {
+    return perfilEhAdministrador(perfil) ||
+           perfil?.trim().toLowerCase() === "organizador";
 }
+

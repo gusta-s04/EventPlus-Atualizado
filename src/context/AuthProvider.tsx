@@ -75,7 +75,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         .finally(() => setCarregandoSessao(false));
     }, [])
 
-    const perfil = session?.usuario.idTipoUsuarioNavigation?.titulo.toLowerCase() ?? "";
+    const perfil = session?.usuario.idTipoUsuarioNavigation?.titulo?.trim().toLowerCase() ?? "";
     return (
         <AuthContext.Provider 
         value={{ 

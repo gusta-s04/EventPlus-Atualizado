@@ -1,16 +1,25 @@
+
 @import "../TipoEvento/TipoEvento.css";
 
 .tipo-usuario-ilustracao {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
 }
 
 .tipo-usuario-ilustracao img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .tipo-usuario-ilustracao {
+        max-width: 300px;
+    }
 }
